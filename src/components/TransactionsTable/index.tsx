@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react';
+import { useTransactions } from '../../hooks/useTransactions';
 import { Container } from './styles';
 
-export const TransectionsTable: React.FC = () => {
+export function TransectionsTable() {
+  const { transactions } = useTransactions();
+
   return (
     <Container>
       <table>
@@ -15,20 +20,27 @@ export const TransectionsTable: React.FC = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Development Z</td>
-            <td>2100:00</td>
-            <td>DV</td>
-            <td>21/21/2112</td>
-          </tr>
-          <tr>
-            <td>Development Z</td>
-            <td>2100:00</td>
-            <td>DV</td>
-            <td>21/21/2112</td>
-          </tr>
+          {transactions.map((transaction) => {
+            return (
+              <tr key={transaction.id}>
+                <td>{transaction.title}</td>
+                <td className={transaction.type}>
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(transaction.amount)}
+                </td>
+                <td>{transaction.category}</td>
+                <td>
+                  {new Intl.DateTimeFormat('pt-BR').format(
+                    new Date(transaction.createdAt),
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </Container>
   );
-};
+}

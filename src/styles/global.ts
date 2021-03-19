@@ -1,6 +1,23 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+
+:root {
+    --background: #F0F2F5;
+    --red: #E52E4D;
+    --blue: #5429CC;
+
+    --blue-light: #6933FF;
+
+    --text-title: #363F5F;
+    --text-body: #969CB3;
+
+    --background: #F0F2F5;
+    --shape: #FFFFFF;
+
+    --green: #33CC95;
+  }
+
   * {
     margin:0;
     padding:0;
@@ -17,12 +34,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: #fff;
+    background: var(--background);
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
-    font-family: 'Roboto' , Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
   }
 
